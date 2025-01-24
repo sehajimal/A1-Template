@@ -18,24 +18,15 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         Options options = new Options();
         options.addOption("i", true, "loading maze");
-
+        
         try {
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("i")) 
             {
-                logger.info("**** Reading the maze from file " + args[1]);
-                BufferedReader reader = new BufferedReader(new FileReader(args[1]));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    for (int idx = 0; idx < line.length(); idx++) {
-                        if (line.charAt(idx) == '#') {
-                            logger.info("WALL ");
-                        } else if (line.charAt(idx) == ' ') {
-                            logger.info("PASS ");
-                        }
-                    }
-                    logger.info(System.lineSeparator());
-                }
+                String mazeFilePath = cmd.getOptionValue("i");
+                logger.info("**** Reading the maze from file " + mazeFilePath);
+                Maze maze = new Maze();
+                maze.displayMaze(mazeFilePath);
             }
             
         } catch(Exception e) {
