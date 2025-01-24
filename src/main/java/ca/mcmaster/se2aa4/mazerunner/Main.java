@@ -23,7 +23,7 @@ public class Main {
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("i")) 
             {
-                logger.trace("**** Reading the maze from file " + args[1]);
+                logger.info("**** Reading the maze from file " + args[1]);
                 BufferedReader reader = new BufferedReader(new FileReader(args[1]));
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -44,6 +44,6 @@ public class Main {
 
         logger.info("**** Computing path");
         logger.error("PATH NOT COMPUTED");
-        logger.error("** End of MazeRunner");
+        logger.info("** End of MazeRunner");
     }
 }
