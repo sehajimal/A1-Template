@@ -4,6 +4,7 @@ public class Player
 {
     private int xCoord;
     private int yCoord;
+    private char direction = 'N';
 
     //constructor
     public Player(int x, int y) 
@@ -22,9 +23,33 @@ public class Player
         return yCoord;
     }
 
+    public char getDirection() 
+    {
+        return direction;
+    }
+
     //method to move player ahead
     public void advance() 
     {
+        if (direction == 'N') 
+        {
+            xCoord--;
+        } 
+        
+        else if (direction == 'E') 
+        {
+            yCoord++;
+        } 
+        
+        else if (direction == 'S') 
+        {
+            xCoord++;
+        } 
+        
+        else if (direction == 'W') 
+        {
+            yCoord--;
+        }
     }
 
     public void moveLeft() 
