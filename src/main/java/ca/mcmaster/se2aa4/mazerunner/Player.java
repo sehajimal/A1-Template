@@ -1,16 +1,22 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+
 public class Player 
 {
     private int xCoord;
     private int yCoord;
     private char direction = 'N';
+    private Maze maze;
+    private ArrayList<String> moves; //list of moves
+
 
     //constructor
     public Player(int x, int y) 
     {
         xCoord = x;
         yCoord = y;
+        moves = new ArrayList<String>();
     }
 
     public int getX() 
@@ -31,6 +37,7 @@ public class Player
     //method to move player ahead
     public void advance() 
     {
+        moves.add("A");
         if (direction == 'N') 
         {
             xCoord--;
@@ -54,12 +61,19 @@ public class Player
 
     public void moveLeft() 
     {
+        moves.add("L");
     }
 
     public void moveRight() 
     {
+        moves.add("R");
     }
     
+    //public boolean completedPath()
+    //{
+        //maze.entryExitPoints();     //need to refactor so that this method returns the entry and exit points
+        //return xCoord = exit[0] && yCoord = exit[1];
+    //} 
 
 
 }
