@@ -18,23 +18,28 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         Options options = new Options();
         options.addOption("i", true, "loading maze");
-        
+        Maze maze = new Maze();
+
         try {
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("i")) 
             {
                 String mazeFilePath = cmd.getOptionValue("i");
                 logger.info("**** Reading the maze from file " + mazeFilePath);
-                Maze maze = new Maze();
                 maze.displayMaze(mazeFilePath);
+                maze.entryExitPoints();
+            } 
+            
+            else 
+            {
+                logger.warn("Please use the -i flag.");
             }
             
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-
         logger.info("**** Computing path");
-        logger.error("PATH NOT COMPUTED");
+        //logger.error("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 }

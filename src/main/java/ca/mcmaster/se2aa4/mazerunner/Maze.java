@@ -9,51 +9,76 @@ public class Maze
 {
     private static final Logger logger = LogManager.getLogger(Maze.class);
     private char[][] maze;
-    int rows = 0;
+    int rows;
     int columns;
 
-    //constructor
-    //public Maze() 
-    //{
+/*     //constructor
+    public Maze() 
+    {
 
-    //}
+    }
 
     //getter method
     public char[][] getMaze() 
     {
         return maze;
-    } 
+    }  */
+
+    //outputting the entry and exit points
+    public void entryExitPoints()
+    {
+        int[] entry = new int[2];
+        int[] exit = new int[2];
+        for (int i = 0; i < rows; i++) 
+        {
+            if (maze[i][0] == ' ') 
+            {
+                entry[0] = i + 1;
+                entry[1] = 1;
+            }
+
+            if (maze[i][columns - 1] == ' ') 
+            {
+                exit[0] = i + 1;
+                exit[1] = columns;
+            }
+        }
+        System.out.println("Entry point: " + entry[0] + ", " + entry[1]);
+        System.out.println("Exit point: " + exit[0] + ", " + exit[1]);
+    }
 
     public void displayMaze(String mazeFilePath)
     {
         try (BufferedReader reader = new BufferedReader(new FileReader(mazeFilePath))) 
         {
-            //reading the first line to get the number of columns
-            String line = reader.readLine();
-            columns = line.length();
-            rows++;
+            String line;
+            rows = 0;
 
+            //counting rows
             while ((line = reader.readLine()) != null) 
             {
+                //counting columns
+                if (rows == 0) 
+                {
+                    columns = line.length();
+                }
                 rows++;
             }
 
             maze = new char[rows][columns];
 
-            BufferedReader newReader = new BufferedReader(new FileReader(mazeFilePath));
-            rows = 0;
-            
-            //storing values in the maze array
-            while((line = newReader.readLine()) != null)
+            try (BufferedReader newReader = new BufferedReader(new FileReader(mazeFilePath)))
             {
-                for(int column = 0; column < columns; column++)
+                int row = 0;
+                //storing values in the maze array
+                while((line = newReader.readLine()) != null)
                 {
-                    maze[rows][column] = line.charAt(column);
+                    maze[row] = line.toCharArray();
+                    row++;
                 }
-                
-                rows++;
             }
 
+            //displaying the maze
             for (int i = 0; i < maze.length; i++) 
             {
                 for (int j = 0; j < maze[i].length; j++) 
