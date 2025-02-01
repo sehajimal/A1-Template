@@ -25,10 +25,9 @@ public class Maze
     }  */
 
     //outputting the entry and exit points
-    public void entryExitPoints()
+    public int[] entryExitPoints()
     {
-        int[] entry = new int[2];
-        int[] exit = new int[2];
+        int[] entry = new int[4];
         for (int i = 0; i < rows; i++) 
         {
             if (maze[i][0] == ' ') 
@@ -39,12 +38,13 @@ public class Maze
 
             if (maze[i][columns - 1] == ' ') 
             {
-                exit[0] = i + 1;
-                exit[1] = columns;
+                entry[2] = i + 1;
+                entry[3] = columns;
             }
         }
-        System.out.println("Entry point: " + entry[0] + ", " + entry[1]);
-        System.out.println("Exit point: " + exit[0] + ", " + exit[1]);
+        return entry;
+        //System.out.println("Entry point: " + entry[0] + ", " + entry[1]);
+        //System.out.println("Exit point: " + entry[2] + ", " + entry[3]);
     }
 
     public void displayMaze(String mazeFilePath)
