@@ -1,5 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solver {
     private char[][] maze;
     private Player player;
@@ -14,31 +17,29 @@ public class Solver {
         this.exitY = entryExit[3];
     }
 
-    public void solve(int x1, int y1, int x2, int y2) {
-        StringBuilder mazePath = new StringBuilder();
-        while(!reachedEnd(x1, y1)) {
-            // logic to move the player
-            // update x1 and y1
+    public void solve() {
+        List<Character> mazePath = new ArrayList<>();
+        while (!reachedEnd(player.getX(), player.getY())) {
             player.moveRight();
-            if (player.checkBounds(maze)) {
-                mazePath.append("R");
+            if (player.canAdvance(maze)) {
+                mazePath.add('R');
+                mazePath.add('F');
+                continue;
             }
 
             player.moveLeft();
-            if (player.checkBounds(maze)) {
-                mazePath.append("F");
+            if (player.canAdvance(maze)) {
+                mazePath.add('F');
+                continue;
             }
 
             player.moveLeft();
-            if (player.checkBounds(maze)) {
-                mazePath.append("L");
-            }
-
-
-
+            mazePath.add('L');
         }
-        if (reachedEnd(x1, y1)) {
+
+        if (reachedEnd(player.getX(), player.getY())) {
             System.out.println("Reached the exit!");
+            System.out.println("Path: " + mazePath.toString());
         } else {
             System.out.println("Not at the exit yet.");
         }

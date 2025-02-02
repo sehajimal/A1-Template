@@ -32,14 +32,14 @@ public class Maze
         {
             if (maze[i][0] == ' ') 
             {
-                entry[0] = i + 1;
-                entry[1] = 1;
+                entry[0] = i;
+                entry[1] = 0;
             }
 
             if (maze[i][columns - 1] == ' ') 
             {
-                entry[2] = i + 1;
-                entry[3] = columns;
+                entry[2] = i;
+                entry[3] = columns-1;
             }
         }
         return entry;
