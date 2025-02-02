@@ -25,7 +25,7 @@ public class Maze
     }  
 
     //outputting the entry and exit points
-    public int[] entryExitPoints()
+    public int[] entryExitPoints()   //fixed before
     {
         int[] entry = new int[4];
         for (int i = 0; i < rows; i++) 
