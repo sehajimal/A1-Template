@@ -12,17 +12,17 @@ public class Maze
     int rows;
     int columns;
 
-/*     //constructor
+    /* //constructor
     public Maze() 
     {
 
-    }
+    } */
 
     //getter method
     public char[][] getMaze() 
     {
         return maze;
-    }  */
+    }  
 
     //outputting the entry and exit points
     public int[] entryExitPoints()

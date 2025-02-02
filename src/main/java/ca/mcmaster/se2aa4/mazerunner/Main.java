@@ -25,14 +25,20 @@ public class Main {
 
         try {
             CommandLine cmd = parser.parse(options, args);
+            int entryExit[] = null;
             if (cmd.hasOption("i")) 
             {
                 String mazeFilePath = cmd.getOptionValue("i");
                 logger.info("**** Reading the maze from file " + mazeFilePath);
                 maze.displayMaze(mazeFilePath);
-                int entryExit[] = maze.entryExitPoints();
+                entryExit = maze.entryExitPoints();
                 System.out.println("Entry point: " + entryExit[0] + ", " + entryExit[1]);
                 System.out.println("Exit point: " + entryExit[2] + ", " + entryExit[3]);
+                if (entryExit != null) {
+                    solver.solve(entryExit[0], entryExit[1], entryExit[2], entryExit[3]);
+                } else {
+                    logger.error("Entry and exit points are not defined.");
+                }
             } 
             
             else 
@@ -44,7 +50,7 @@ public class Main {
             {
                 String path = cmd.getOptionValue("p");
                 logger.info("**** Checking path " + path);
-                solver.solve();
+            
             } 
             
             else 

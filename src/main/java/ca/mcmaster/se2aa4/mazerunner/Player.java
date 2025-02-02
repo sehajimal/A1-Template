@@ -34,6 +34,10 @@ public class Player
         return direction;
     }
 
+    public boolean checkBounds(char[][] maze) 
+    {
+        return xCoord >= 0 && xCoord < maze.length && yCoord >= 0 && yCoord < maze[0].length&& maze[xCoord][yCoord] != '#';
+    }
     //method to move player ahead
     public void advance() 
     {
