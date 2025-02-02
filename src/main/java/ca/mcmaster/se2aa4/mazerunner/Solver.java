@@ -39,7 +39,7 @@ public class Solver {
 
         if (reachedEnd(player.getX(), player.getY())) {
             System.out.println("Reached the exit!");
-            System.out.println("Path: " + mazePath.toString());
+            System.out.println("Path: " + convertToFactorizedPath(mazePath));
         } else {
             System.out.println("Not at the exit yet.");
         }
@@ -47,6 +47,29 @@ public class Solver {
 
     private boolean reachedEnd(int x, int y) {
         return x == exitX && y == exitY;
+    }
+
+    private String convertToFactorizedPath(List<Character> solvedPathway) {
+        int count = 1;
+        StringBuilder factorizedPath = new StringBuilder();
+        for (int i = 1; i <= solvedPathway.size(); i++) 
+        {
+            if (i < solvedPathway.size() && solvedPathway.get(i - 1) == solvedPathway.get(i)) 
+            {
+                count++;
+            } 
+            
+            else 
+            {
+                if (count > 1) 
+                {
+                    factorizedPath.append(count);
+                }
+                factorizedPath.append(solvedPathway.get(i - 1));
+                count = 1;
+            }
+        }
+        return factorizedPath.toString();
     }
 
     public void checkPath(String path) {
