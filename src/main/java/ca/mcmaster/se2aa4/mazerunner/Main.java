@@ -20,7 +20,7 @@ public class Main {
         options.addOption("i", true, "loading maze");
         options.addOption("p", true, "checking path");
         Maze maze = new Maze();
-        Player player = new Player(1, 1);
+        Player player = new Player(0, 0);
         Solver solver = new Solver(maze, player);
 
         try {
