@@ -24,8 +24,8 @@ public class Maze
         return maze;
     }  
 
-    //outputting the entry and exit points
-    public int[] entryExitPoints()   //fixed before
+    //method to get the entry and exit points
+    public int[] entryExitPoints()   
     {
         int[] entry = new int[4];
         for (int i = 0; i < rows; i++) 
@@ -47,6 +47,7 @@ public class Maze
         //System.out.println("Exit point: " + entry[2] + ", " + entry[3]);
     }
 
+    //method to process maze file
     public void displayMaze(String mazeFilePath)
     {
         try (BufferedReader reader = new BufferedReader(new FileReader(mazeFilePath))) 
@@ -78,7 +79,7 @@ public class Maze
                 }
             }
 
-            //displaying the maze
+            /* //displaying the maze
             for (int i = 0; i < maze.length; i++) 
             {
                 for (int j = 0; j < maze[i].length; j++) 
@@ -86,7 +87,7 @@ public class Maze
                     System.out.print(maze[i][j]);
                 }
                 System.out.print("\n");
-            }
+            } */
         } 
         
         catch(Exception e) 

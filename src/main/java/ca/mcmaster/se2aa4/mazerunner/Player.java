@@ -11,7 +11,7 @@ public class Player
     {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
-        this.direction = 'E'; // Default direction is North
+        this.direction = 'E'; //setting to initialy face east
     }
 
     public int getX() 
@@ -29,11 +29,13 @@ public class Player
         return direction;
     }
 
+    //ensuring the player does not go out of bounds
     public boolean checkBounds(char[][] maze, int xCoordNew, int yCoordNew) 
     {
         return maze[xCoordNew][yCoordNew] != '#' && yCoordNew >= 0 && yCoordNew < maze[0].length && xCoordNew >= 0 && xCoordNew < maze.length;
     }
 
+    //checking if the player can advance
     public boolean canAdvance(char[][] maze)
     {
         int xCoordNew = xCoord;

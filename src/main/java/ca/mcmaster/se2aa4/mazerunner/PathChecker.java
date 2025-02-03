@@ -16,47 +16,55 @@ public class PathChecker
         this.exitY = entryExit[3];
     }
 
-    private void checkingMove(char move) {
-        if (move == 'F') {
+    private void checkingMove(char move) 
+    {
+        if (move == 'F') 
+        {
             player.canAdvance(maze);
         } 
-        else if (move == 'L') {
+        else if (move == 'L') 
+        {
             player.moveLeft();
         } 
-        else if (move == 'R') {
+        else if (move == 'R') 
+        {
             player.moveRight();
         }
     }
 
     public void checkPath(String path) 
     {
-        for (int i = 0; i < path.length(); i++) {
+        for (int i = 0; i < path.length(); i++) 
+        {
             char value = path.charAt(i);
             
-            if (Character.isDigit(value)) {
+            if (Character.isDigit(value)) 
+            {
                 int digitValue = value - '0'; // Convert char digit to int
-                if (i + 1 < path.length()) {
+                if (i + 1 < path.length()) 
+                {
                     char value1 = path.charAt(i + 1);
-                    for (int j = 0; j < digitValue; j++) {
+                    for (int j = 0; j < digitValue; j++) 
+                    {
                         checkingMove(value1);
                     }
-                    i++;   //after done prossessing go to next character
+                    i++;   //after done with the repeated character go to next character
                 }
             } 
-            else {
+            else 
+            {
                 checkingMove(value);
             }
         }
         
         
-
-        if (player.getX() == exitX &&  player.getY() == exitY) 
+        if (player.getX() == exitX && player.getY() == exitY) 
         {
-            System.out.println("Path is valid.");
+            System.out.println("correct path");
         } 
         else 
         {
-            System.out.println("Path is invalid.");
+            System.out.println("incorrect path");
         }
     }
 }

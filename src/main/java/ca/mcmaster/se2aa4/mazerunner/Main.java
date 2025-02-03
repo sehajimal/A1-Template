@@ -1,9 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
@@ -12,7 +8,8 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         logger.info("** Starting Maze Runner");
 
         CommandLineParser parser = new DefaultParser();
@@ -30,16 +27,12 @@ public class Main {
             
             String mazeFilePath = cmd.getOptionValue("i");
             logger.info("**** Reading the maze from file " + mazeFilePath);
+            
             Maze maze = new Maze();
             maze.displayMaze(mazeFilePath);
             
             int entryExit[] = maze.entryExitPoints();
-            if (entryExit != null) {
-                System.out.println("Entry point: " + entryExit[0] + ", " + entryExit[1]);
-                System.out.println("Exit point: " + entryExit[2] + ", " + entryExit[3]);
-            } else {
-                logger.error("Entry and exit points are not defined.");
-            }
+            
             Player player1 = new Player(entryExit[0], entryExit[1]);
 
             if (cmd.hasOption("p")) 
@@ -52,14 +45,11 @@ public class Main {
             
             else 
             {
-                logger.warn("Please use the -p flag.");
+                Player player = new Player(entryExit[0], entryExit[1]);
+                RightHandSolver solver = new RightHandSolver(maze, player);
+                solver.solve();
             }
-            
-            Player player = new Player(entryExit[0], entryExit[1]);
-            Solver solver = new Solver(maze, player);
-            solver.solve();
         
-            
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
