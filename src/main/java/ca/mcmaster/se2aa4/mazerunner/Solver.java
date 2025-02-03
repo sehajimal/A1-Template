@@ -71,8 +71,4 @@ public class Solver {
         }
         return factorizedPath.toString();
     }
-
-    public void checkPath(String path) {
-        // method to check the path
-    }
 }
