@@ -16,48 +16,78 @@ public class PathChecker
         this.exitY = entryExit[3];
     }
 
-    private void checkingMove(char move) 
+    private boolean checkingMove(char move) 
     {
         if (move == 'F') 
         {
-            player.canAdvance(maze);
+            return player.canAdvance(maze);
         } 
         else if (move == 'L') 
         {
             player.moveLeft();
+            return true;
         } 
         else if (move == 'R') 
         {
             player.moveRight();
+            return true;
+        } 
+        else 
+        {
+            return false;
         }
     }
 
     public void checkPath(String path) 
     {
+        StringBuilder expandedPath = new StringBuilder();
+
+        // Expand the factorized path into a regular path
         for (int i = 0; i < path.length(); i++) 
         {
             char value = path.charAt(i);
-            
+
             if (Character.isDigit(value)) 
             {
-                int digitValue = value - '0'; // Convert char digit to int
-                if (i + 1 < path.length()) 
+                // Parse the full number (multi-digit support)
+                int digitStart = i;
+                while (i < path.length() && Character.isDigit(path.charAt(i))) 
                 {
-                    char value1 = path.charAt(i + 1);
-                    for (int j = 0; j < digitValue; j++) 
+                    i++;
+                }
+                int repeatCount = Integer.parseInt(path.substring(digitStart, i));
+                if (i < path.length()) 
+                {
+                    char move = path.charAt(i);
+                    for (int j = 0; j < repeatCount; j++) 
                     {
-                        checkingMove(value1);
+                        expandedPath.append(move);
                     }
-                    i++;   //after done with the repeated character go to next character
                 }
             } 
             else 
             {
-                checkingMove(value);
+                expandedPath.append(value);
+            }
+        }
+
+        // Validate the expanded path
+        for (int i = 0; i < expandedPath.length(); i++) 
+        {
+            char move = expandedPath.charAt(i);
+            if (!checkingMove(move)) 
+            {
+                return;
+            }
+
+            // Check if the player is out of bounds
+            if (player.getX() < 0 || player.getY() < 0 || player.getX() >= maze.length || player.getY() >= maze[0].length) 
+            {
+                return;
             }
         }
         
-        
+        // Check if the player reached the exit
         if (player.getX() == exitX && player.getY() == exitY) 
         {
             System.out.println("correct path");
