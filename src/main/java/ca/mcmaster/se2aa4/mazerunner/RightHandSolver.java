@@ -59,7 +59,7 @@ public class RightHandSolver implements Solver{
         return x == exitX && y == exitY;
     }
 
-    private String convertToFactorizedPath(List<Character> solvedPathway) 
+    public String convertToFactorizedPath(List<Character> solvedPathway) 
     {
         int count = 1;
         StringBuilder factorizedPath = new StringBuilder();
