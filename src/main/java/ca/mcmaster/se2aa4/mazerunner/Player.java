@@ -29,6 +29,17 @@ public class Player
         return direction;
     }
 
+    public void set(int xCoord, int yCoord) 
+    {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+    }
+
+    public void setDirection(char direction) 
+    {
+        this.direction = direction;
+    }
+
     //ensuring the player does not go out of bounds
     public boolean checkBounds(char[][] maze, int xCoordNew, int yCoordNew) 
     {

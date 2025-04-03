@@ -1,29 +1,41 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import ca.mcmaster.se2aa4.mazerunner.CommandPattern.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RightHandSolver implements Solver{
+public class RightHandSolver implements Solver 
+{
     private char[][] maze;
     private Player player;
     private int exitX;
     private int exitY;
 
-    public RightHandSolver(Maze maze, Player player) {
-        this.maze = maze.getMaze(); 
+    private MovingCommand moveRightCommand;
+    private MovingCommand moveLeftCommand;
+    private AdvanceCommand advanceCommand;
+
+    public RightHandSolver(Maze maze, Player player) 
+    {
+        this.maze = maze.getMaze();
         this.player = player;
-        int[] entryExit = maze.entryExitPoints(); 
+        int[] entryExit = maze.entryExitPoints();
         this.exitX = entryExit[2];
         this.exitY = entryExit[3];
+
+        this.moveRightCommand = new MoveRightCommand(player);
+        this.moveLeftCommand = new MoveLeftCommand(player);
+        this.advanceCommand = new AdvanceCommand(player, maze);
     }
 
-    // This method is used to solve the maze using the right-hand rule
     @Override
-    public void solve() {
-        List<Character> mazePath = new ArrayList<>();       // List to store the path taken by the player
+    public void solve() 
+    {
+        List<Character> mazePath = new ArrayList<>(); 
+
         while (!reachedEnd(player.getX(), player.getY())) 
         {
-            player.moveRight();        //checking if the player can move right
+            moveRightCommand.execute();
             if (player.canAdvance(maze)) 
             {
                 mazePath.add('R');
@@ -31,20 +43,22 @@ public class RightHandSolver implements Solver{
                 continue;
             }
 
-            player.moveLeft();        //checking if the player can advance
+            // Undo moveRightCommand if advancing is not possible
+            moveRightCommand.undo();
+
             if (player.canAdvance(maze)) 
             {
                 mazePath.add('F');
                 continue;
             }
 
-            player.moveLeft();          //otherwise move left
+            // Execute moveLeftCommand
+            moveLeftCommand.execute();
             mazePath.add('L');
         }
 
         if (reachedEnd(player.getX(), player.getY())) 
         {
-            //System.out.println("Reached the exit!");
             System.out.println(convertToFactorizedPath(mazePath));
         } 
         
@@ -63,7 +77,7 @@ public class RightHandSolver implements Solver{
     {
         int count = 1;
         StringBuilder factorizedPath = new StringBuilder();
-        for (int i = 1; i <= solvedPathway.size(); i++)       //counting the number of times the player moves in the same direction
+        for (int i = 1; i <= solvedPathway.size(); i++) 
         {
             if (i < solvedPathway.size() && solvedPathway.get(i - 1) == solvedPathway.get(i)) 
             {
