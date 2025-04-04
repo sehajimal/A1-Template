@@ -4,7 +4,7 @@ import ca.mcmaster.se2aa4.mazerunner.CommandPattern.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RightHandSolver implements Solver 
+public class RightHandSolver extends Solver 
 {
     private char[][] maze;
     private Player player;

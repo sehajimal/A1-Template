@@ -46,8 +46,15 @@ public class Main {
             else 
             {
                 Player player = new Player(entryExit[0], entryExit[1]);
-                RightHandSolver solver = new RightHandSolver(maze, player);
-                solver.solve();
+                SolverFactory solverFactory = new SolverFactory();
+                Solver solver = solverFactory.getSolver("righthand", maze, player);       //get an object of righthand
+                solver.solve();    //call solve method of righthand solver
+                
+                // Solver solver2 = solverFactory.getSolver("bestfirst", maze, player);    
+                // solver2.solve(); 
+
+                // Above is an example of how more solvers can be initialized
+
             }
         
         } catch(Exception e) {
